@@ -22,6 +22,7 @@
 %                    the inliers for the best model.
 %
 % See Also: RANSAC, FUNDMATRIX
+
 % Copyright (c) 2004-2005 Peter Kovesi
 % School of Computer Science & Software Engineering
 % The University of Western Australia
@@ -35,6 +36,7 @@
 % all copies or substantial portions of the Software.
 %
 % The Software is provided "as is", without warranty of any kind.
+
 % February 2004  Original version
 % August   2005  Distance error function changed to match changes in RANSAC
 
@@ -75,6 +77,7 @@ function [F, inliers] = ransacfitfundmatrix(x1, x2, t, feedback)
     degenfn   = @isdegenerate;
     % x1 and x2 are 'stacked' to create a 6xN array for ransac
     [F, inliers] = ransac([x1; x2], fittingfn, distfn, degenfn, s, t, feedback);
+
     % Now do a final least squares fit on the data points considered to
     % be inliers.
     F = fundmatrix(x1(:,inliers), x2(:,inliers));
@@ -93,7 +96,7 @@ function [F, inliers] = ransacfitfundmatrix(x1, x2, t, feedback)
 % which we have to pick the best one. (A 7 point solution can return up to 3
 % solutions)
 
-function [bestInliers, bestF] = funddist(F, x, t)
+function [bestInliers, bestF] = funddist(F, x, t);
     
     x1 = x(1:3,:);    % Extract x1 and x2 from x
     x2 = x(4:6,:);
