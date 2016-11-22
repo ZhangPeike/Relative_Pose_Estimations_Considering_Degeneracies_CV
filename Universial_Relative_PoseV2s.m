@@ -1,10 +1,9 @@
 function [ Right_Rt ] = Universial_Relative_PoseV2s( K1,K2,matches,threshold )
 % Paper: A Universial Solution to Relative Pose Problem
 % Considering motion degeneracy and structrue degeneracy
-% Author:Zhang Peike
+% Author:Peike Zhang, Yuanxin Wu, Qi Cai, Danping Zou
 % Date:2016.Sept.10
 % Detail: Inliers are determined by the F matrix estimating
-% Remaining task: Estimating Homography nonlinearly 
 % imsize: Width Height, opposite to the size function!!!
 %% Fundamental matrix
 % Robust estimating F
@@ -54,10 +53,10 @@ else
     ErrorSum_H = MyReError( matches(:,inliersF),ReprojectionPointInHomoH );
     if ErrorSum_H<ErrorSum_F
         Right_Rt=RtH;
-        disp('Chosen H');
+        disp('Selecting Homography.');
     else
         Right_Rt=RtF;
-        disp('Chosen F');
+        disp('Selecting Essential Matrix.');
     end  
 end
 end
