@@ -4,6 +4,7 @@ For the real image data, we have managed to obtain point feature correspondence 
 Results (matches and K matrix) can be used directly to test the relative pose estimating algorithms.
 The functions are written in Matlab (R2015 or later) for windows.
 Feel free to contact, zhangpeike@csu.edu.cn
+Author: Peike Zhang,Yuanxin Wu
 Reference
 B. K. Horn, "Recovering baseline and orientation from essential matrix," J. Opt. Soc. Am, vol. 110, 1990.
 R. Hartley and A. Zisserman, Multiple view geometry in computer vision: Cambridge university press, 2003.
