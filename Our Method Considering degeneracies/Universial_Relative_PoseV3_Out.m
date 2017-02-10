@@ -1,4 +1,4 @@
-function [ Right_Rt, Qt, D, M] = Universial_Relative_PoseV3( K1,K2,matches,tF,tH)
+function [ Right_Rt, Qt, D, M, w_E,w_H] = Universial_Relative_PoseV3_Out( K1,K2,matches,tF,tH)
 % A Universial Solution to Relative Pose Problem Considering motion degeneracy and structrue degeneracy
 % Author:Zhang Peike
 % Date:2016.Sept.10
