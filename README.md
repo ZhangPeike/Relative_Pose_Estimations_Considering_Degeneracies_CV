@@ -5,6 +5,7 @@ Results (matches and K matrix) can be used directly to test the relative pose es
 The model estimations are all run in RANSAC loop to avoid possible outliers.
 The functions are written in Matlab (R2015 or later) for windows.
 We have used RANSAC scheme and thirdparty software(Pix4D, Multiple View Environment) and we are adding our method into some noteable visual-SLAM to improve its tracking (pose esitmation) performance.
+We have managed to reconstruct planar structure with the proposed pipeline embedded into the initialization step of the SFM part of MVE, please see the repo 3D-reconstruction-system for the soucre code and built exetuble.
 Feel free to contact, zhangpeike@csu.edu.cn
 Author: Peike Zhang,Yuanxin Wu, Qi Cai and Danping Zou
 Some References
