@@ -17,13 +17,14 @@ fprintf('Diag Matrix in SVD of A:%.3f %.3f %.3f\n',w(1,1),w(2,2),w(3,3));
 %Enforce the property 1
 disp(A);
 A=A/d2;
+A=A*det(A);
 disp(A);
 [U,w,V]=svd(A);
 % 2016Äê10ÔÂ9ÈÕ16:12:30
 %U=det(U)*U;
 %Vt=det(Vt)*Vt;
-s=det(U)*det(V);
-fprintf('Variable s sign:%.4f\n',s);
+% s=det(U)*det(V);
+% fprintf('Variable s sign:%.4f\n',s);
 % d2 must be equal to 1
 %d2=w(2,2);
 fprintf('Diag Matrix in SVD of G:%.5f %.5f %.5f\n',w(1,1),w(2,2),w(3,3));
@@ -44,28 +45,29 @@ Rp=zeros(3,3,4);
 tp=zeros(3,4);
 R=zeros(3,3,4);
 t=zeros(3,4);
-if s>0
-    disp('s>0');
-    aux1=sqrt((d1^2-d2^2)/(d1^2-d3^2));
-    aux3=sqrt((d2^2-d3^2)/(d1^2-d3^2));
-    x1=[aux1;aux1;-aux1;-aux1];
-    x3=[aux3;-aux3;aux3;-aux3];
-    aux_sin_Theta=sqrt((d1^2-d2^2)*(d2^2-d3^2))/((d1+d3)*d2);
-    cos_Theta=(d2^2+d1*d3)/((d1+d3)*d2);
-    sin_Theta=[aux_sin_Theta;-aux_sin_Theta;-aux_sin_Theta;aux_sin_Theta];
-    for i=1:4
-        %(13)
-        Rp(:,:,i)=[cos_Theta,0,-sin_Theta(i);
-            0,        1,         0;
-            sin_Theta(i),0,cos_Theta];
-        % Faugeras (8)
-        R(:,:,i)=s*U*Rp(:,:,i)*V';
-        %Eula(i,:)=dcm2eul(R(:,:,i))*180/pi;
-        %(14)
-        tp(:,i)=(d1-d3)*[x1(i);0;-x3(i)];
-        t(:,i)=U*tp(:,i);
-    end
+% if s>0
+%     disp('s>0');
+aux1=sqrt((d1^2-d2^2)/(d1^2-d3^2));
+aux3=sqrt((d2^2-d3^2)/(d1^2-d3^2));
+x1=[aux1;aux1;-aux1;-aux1];
+x3=[aux3;-aux3;aux3;-aux3];
+aux_sin_Theta=sqrt((d1^2-d2^2)*(d2^2-d3^2))/((d1+d3)*d2);
+cos_Theta=(d2^2+d1*d3)/((d1+d3)*d2);
+sin_Theta=[aux_sin_Theta;-aux_sin_Theta;-aux_sin_Theta;aux_sin_Theta];
+for i=1:4
+    %(13)
+    Rp(:,:,i)=[cos_Theta,0,-sin_Theta(i);
+        0,        1,         0;
+        sin_Theta(i),0,cos_Theta];
+    % Faugeras (8)
+    R(:,:,i)=s*U*Rp(:,:,i)*V';
+    %Eula(i,:)=dcm2eul(R(:,:,i))*180/pi;
+    %(14)
+    tp(:,i)=(d1-d3)*[x1(i);0;-x3(i)];
+    t(:,i)=U*tp(:,i);
 end
+%end
+%{
 if s<0
     disp('s<0');
     aux_sin_Phi=sqrt((d1^2-d2^2)*(d2^2-d3^2))/((d1-d3)*d2);
@@ -81,6 +83,7 @@ if s<0
         t(:,i)=U*tp(:,i);
     end
 end
+%}
 P1=K1*[eye(3) zeros(3,1)];
 Vote=zeros(1,4);
 for i=1:4
